@@ -29,11 +29,10 @@
 
 		<maven.test.skip>true</maven.test.skip>
 
-		<!-- SQL access -->
 		<INSTANCE_CONNECTION_NAME>cloudcwk:europe-west1:shopdb</INSTANCE_CONNECTION_NAME>
 		<user>postgres</user>
 		<password>postgres</password>
-		<database>content</database>
+		<database>postgres</database>
 
 	</properties>
 
@@ -112,6 +111,14 @@
 			<artifactId>appengine-gcs-client</artifactId>
 			<version>0.8</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>3.3.1</version>
+		</dependency>
+
 
 		<!-- Test Dependencies -->
 
