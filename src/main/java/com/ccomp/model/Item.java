@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
+import javax.sql.DataSource;
+
 public final class Item {
 
 	private int item_nr;
@@ -16,8 +18,8 @@ public final class Item {
 	private String curr; // <=3 chars
 	private int image_key;
 
-	public static Item factory(int item_nr) throws SQLException {
-		try (Connection conn = (Connection) GCloudSQL.createConnectionPool()) {
+	public static Item factory(int item_nr, DataSource ds) throws SQLException {
+		try (Connection conn = ds.getConnection()) {
 			PreparedStatement selectClause = conn
 					.prepareStatement("select * from item where item_nr = " + item_nr + ";");
 			ResultSet result = selectClause.executeQuery();
@@ -25,14 +27,14 @@ public final class Item {
 				return new Item(result.getInt("item_nr"), result.getString("name"), result.getString("description"),
 						result.getDouble("price"), result.getString("currency"), result.getInt("image_key"));
 		}
-		return null;
+		throw new SQLException("No item found.");
 	}
 
-	public static List<Item> loadAllItems() throws SQLException {
+	public static List<Item> loadAllItems(DataSource ds) throws SQLException {
 
 		List<Item> ret = new Vector<Item>();
 
-		try (Connection conn = (Connection) GCloudSQL.createConnectionPool()) {
+		try (Connection conn = ds.getConnection()) {
 			PreparedStatement selectClause = conn.prepareStatement("select * from item;");
 			ResultSet result = selectClause.executeQuery();
 			while (result.next()) {
