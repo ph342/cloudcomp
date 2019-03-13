@@ -14,8 +14,6 @@
 </head>
 <body>
 	<h2>Hello!</h2>
-		<!--     <c:forEach items="${requestScope['indexServlet.allItems']}" var="item"/> -->
-
 	<table>
 		<c:forEach items="${indexServlet.allItems}" var="item">
 			<tr>

@@ -32,7 +32,7 @@ public final class GCloudSQL implements ServletContextListener {
 
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
-		HikariDataSource pool = (HikariDataSource) sce.getServletContext().getAttribute("db-connection");
+		HikariDataSource pool = (HikariDataSource) sce.getServletContext().getAttribute(conn);
 		if (pool != null) {
 			pool.close();
 		}
