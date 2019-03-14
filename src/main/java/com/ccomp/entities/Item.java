@@ -11,8 +11,10 @@ public final class Item implements Serializable {
 	private double price; // 15,2
 	private String curr; // <=3 chars
 	private int imageKey;
-	
-	public Item() {}
+	private String imageUri;
+
+	public Item() {
+	}
 
 	public Item(int itemNr, String name, String descr, double price, String curr, int imageKey) {
 		this.itemNr = itemNr;
@@ -21,6 +23,10 @@ public final class Item implements Serializable {
 		this.price = price;
 		this.curr = curr;
 		this.imageKey = imageKey;
+
+		// http://storage.googleapis.com/[BUCKET_NAME]/[OBJECT_NAME]
+		this.imageUri = "http://storage.googleapis.com/cloudcwkstorage/images/items/" + String.valueOf(this.imageKey)
+				+ ".jpg";
 	}
 
 	public int getItemNr() {
@@ -45,5 +51,9 @@ public final class Item implements Serializable {
 
 	public int getImageKey() {
 		return imageKey;
+	}
+
+	public String getImageUri() {
+		return imageUri;
 	}
 }

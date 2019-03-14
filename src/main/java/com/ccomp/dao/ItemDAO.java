@@ -15,8 +15,9 @@ public final class ItemDAO {
 
 	public static Item findById(int itemNr, DataSource ds) throws SQLException {
 		try (Connection conn = ds.getConnection()) {
-			PreparedStatement selectClause = conn
-					.prepareStatement("select * from item where item_nr = " + itemNr + ";");
+			PreparedStatement selectClause = conn.prepareStatement("select * from item where item_nr = ?;");
+			selectClause.setInt(1, itemNr);
+
 			ResultSet result = selectClause.executeQuery();
 			if (result.first()) {
 				return new Item(result.getInt("item_nr"), result.getString("name"), result.getString("description"),

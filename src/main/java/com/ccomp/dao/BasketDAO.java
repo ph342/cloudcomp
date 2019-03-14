@@ -17,10 +17,11 @@ public final class BasketDAO {
 
 	public static Basket findById(String firebaseUid, DataSource ds) throws SQLException {
 		try (Connection conn = ds.getConnection()) {
-			PreparedStatement selectBasket = conn
-					.prepareStatement("select * from basket where firebase_uid = " + firebaseUid + ";");
+			PreparedStatement selectBasket = conn.prepareStatement("select * from basket where firebase_uid = ?;");
+			selectBasket.setString(1, firebaseUid);
 			PreparedStatement selectBasketItems = conn
-					.prepareStatement("select * from basketitem where firebase_uid = " + firebaseUid + ";");
+					.prepareStatement("select * from basketitem where firebase_uid = ?;");
+			selectBasket.setString(1, firebaseUid);
 
 			ResultSet resultBasket = selectBasket.executeQuery();
 			ResultSet resultBasketItems = selectBasketItems.executeQuery();
@@ -35,26 +36,34 @@ public final class BasketDAO {
 				return new Basket(firebaseUid, items);
 
 			} else
-				throw new SQLException("No item found.");
+				throw new SQLException("No basket found.");
 		}
 	}
 
 	public static void modifyBasket(Basket basket, DataSource ds) throws SQLException {
+		// update and insert
 		try (Connection conn = ds.getConnection()) {
 			try {
 				// disable Commit
 				conn.setAutoCommit(false);
 
-				PreparedStatement insertBasket = conn.prepareStatement("insert into basket values ("
-						+ basket.getFirebase_uid() + ") " + "on conflict on (firebase_uid) do nothing;");
-				PreparedStatement deleteBasketItems = conn.prepareStatement(
-						"delete from basketitem where firebase_uid = " + basket.getFirebase_uid() + ";");
+				PreparedStatement insertBasket = conn
+						.prepareStatement("insert into basket values (?) on conflict on (firebase_uid) do nothing;");
+				insertBasket.setString(1, basket.getFirebase_uid());
+
+				PreparedStatement deleteBasketItems = conn
+						.prepareStatement("delete from basketitem where firebase_uid = ?;");
+				deleteBasketItems.setString(1, basket.getFirebase_uid());
 
 				List<PreparedStatement> allItems = new ArrayList<PreparedStatement>();
 
 				for (BasketItem i : basket.getItems()) {
-					allItems.add(conn.prepareStatement("insert into basketitem values (" + basket.getFirebase_uid()
-							+ ", " + i.getBasketItemCounter() + ", " + i.getItemNr() + ";"));
+					PreparedStatement insertItem = conn.prepareStatement("insert into basketitem values (?, ?, ?);");
+					insertItem.setString(1, basket.getFirebase_uid());
+					insertItem.setInt(2, i.getBasketItemCounter());
+					insertItem.setInt(3, i.getItemNr());
+
+					allItems.add(insertItem);
 				}
 
 				// update Basket
@@ -78,10 +87,11 @@ public final class BasketDAO {
 			try {
 				conn.setAutoCommit(false);
 
-				PreparedStatement deleteBasket = conn
-						.prepareStatement("delete from basket where firebase_uid = " + basket.getFirebase_uid() + ";");
-				PreparedStatement deleteBasketItems = conn.prepareStatement(
-						"delete from basketitem where firebase_uid = " + basket.getFirebase_uid() + ";");
+				PreparedStatement deleteBasket = conn.prepareStatement("delete from basket where firebase_uid = ?;");
+				deleteBasket.setString(1, basket.getFirebase_uid());
+				PreparedStatement deleteBasketItems = conn.prepareStatement("delete from basketitem where firebase_uid = ?;");
+				deleteBasketItems.setString(1, basket.getFirebase_uid());
+
 				deleteBasket.execute();
 				deleteBasketItems.execute();
 

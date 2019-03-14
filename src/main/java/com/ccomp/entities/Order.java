@@ -13,18 +13,36 @@ public class Order implements Serializable {
 	private String status;
 	private String firebaseUid;
 	private List<OrderItem> items;
+	private boolean flNew; // order is new
 
 	public Order() {
 	}
 
-	public Order(int orderNr, LocalDateTime timestamp, String status, String firebaseUid, List<OrderItem> items) {
+	public Order(int orderNr, LocalDateTime timestamp, String status, String firebaseUid, List<OrderItem> items, boolean flNew) {
 		this.orderNr = orderNr;
 		this.timestamp = timestamp;
 		this.status = status;
 		this.firebaseUid = firebaseUid;
 		this.items = items;
+		this.flNew = flNew;
 	}
 
+	public Order(int orderNr, LocalDateTime timestamp, String status, String firebaseUid, boolean flNew) {
+		this.orderNr = orderNr;
+		this.timestamp = timestamp;
+		this.status = status;
+		this.firebaseUid = firebaseUid;
+		this.flNew = flNew;
+	}
+	
+	public Order(LocalDateTime timestamp, String status, String firebaseUid) {
+		// constructor for NEW orders
+		this.timestamp = timestamp;
+		this.status = status;
+		this.firebaseUid = firebaseUid;
+		this.flNew = true;
+	}
+	
 	public void organiseOrderItemCounters() {
 		int orderItemCounter = 0;
 
@@ -99,5 +117,13 @@ public class Order implements Serializable {
 
 	public void setItems(List<OrderItem> items) {
 		this.items = items;
+	}
+	
+	public boolean isFlNew() {
+		return flNew;
+	}
+
+	public void setFlNew(boolean flNew) {
+		this.flNew = flNew;
 	}
 }

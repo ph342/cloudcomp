@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.ccomp.servlets;
 
 import java.io.IOException;
@@ -16,6 +13,7 @@ import javax.sql.DataSource;
 
 import com.ccomp.dao.ItemDAO;
 import com.ccomp.entities.Item;
+import com.google.gson.Gson;
 
 @SuppressWarnings("serial")
 @WebServlet("/getAllItems")
@@ -31,8 +29,7 @@ public final class GetAllItems extends HttpServlet {
 	        resp.setContentType("application/json");
 	        resp.setCharacterEncoding("UTF-8");
 
-			//TODO JSON or XML?
-			//resp.getWriter().write(allItems);
+			resp.getWriter().write(new Gson().toJson(allItems));
 		} catch (SQLException e) {
 			resp.setStatus(500);
 			resp.setContentType("text/plain");
