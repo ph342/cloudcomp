@@ -27,7 +27,7 @@ public final class OrderDAO {
 			ResultSet resultOrder = selectOrder.executeQuery();
 			ResultSet resultOrderItems = selectOrderItems.executeQuery();
 
-			if (resultOrder.first()) {
+			if (resultOrder.next()) {
 				List<OrderItem> items = new Vector<OrderItem>();
 
 				while (resultOrderItems.next())
@@ -54,7 +54,7 @@ public final class OrderDAO {
 			List<Order> ret = new Vector<Order>();
 			Order order;
 
-			if (!resultOrder.first())
+			if (!resultOrder.next())
 				throw new SQLException("No orders found.");
 
 			order = new Order(resultOrder.getInt("order_nr"), resultOrder.getObject("timestamp", LocalDateTime.class),

@@ -19,7 +19,7 @@ public final class ItemDAO {
 			selectClause.setInt(1, itemNr);
 
 			ResultSet result = selectClause.executeQuery();
-			if (result.first()) {
+			if (result.next()) {
 				return new Item(result.getInt("item_nr"), result.getString("name"), result.getString("description"),
 						result.getDouble("price"), result.getString("currency"), result.getInt("image_key"));
 			} else
