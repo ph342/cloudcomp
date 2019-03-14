@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+<script>
+	// Initialize Firebase
+	var config = {
+		apiKey : "AIzaSyDs2-dJqGcEulxb56LkGV7NuOmKpNujZSc",
+		authDomain : "cloudcwk.firebaseapp.com",
+		databaseURL : "https://cloudcwk.firebaseio.com",
+		projectId : "cloudcwk",
+		storageBucket : "cloudcwk.appspot.com",
+		messagingSenderId : "69057237839"
+	};
+	firebase.initializeApp(config);
+</script>
+<meta charset="UTF-8">
+<title>User Login</title>
+<link rel="stylesheet" type="text/css" href="login.css" />
+<script type="text/javascript" src="login.js"></script>
+</head>
+<body>
+	<div id="login_frame">
+		<p id="image_logo">
+			<img src="https://storage.googleapis.com/cloudcwkstorage/images/items/144.jpg">
+		</p>
+		<form method="post" action="login.js">
+			<p>
+				<label class="label_input">UserName</label><input type="text"
+					id="username" class="text_field" />
+			</p>
+			<p>
+				<label class="label_input">Password</label><input type="text"
+					id="password" class="text_field" />
+			</p>
+			<div id="login_control">
+				<input type="button" id="btn_login" value="Login" onclick="login()" />
+				<a id="forget_pwd" href="forget_pwd.html">Forget Password？</a>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
