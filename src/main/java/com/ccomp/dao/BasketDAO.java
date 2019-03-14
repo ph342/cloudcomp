@@ -21,12 +21,12 @@ public final class BasketDAO {
 			selectBasket.setString(1, firebaseUid);
 			PreparedStatement selectBasketItems = conn
 					.prepareStatement("select * from basketitem where firebase_uid = ?;");
-			selectBasket.setString(1, firebaseUid);
+			selectBasketItems.setString(1, firebaseUid);
 
 			ResultSet resultBasket = selectBasket.executeQuery();
 			ResultSet resultBasketItems = selectBasketItems.executeQuery();
 
-			if (resultBasket.first()) {
+			if (resultBasket.next()) {
 				List<BasketItem> items = new Vector<BasketItem>();
 
 				while (resultBasketItems.next())
@@ -48,7 +48,7 @@ public final class BasketDAO {
 				conn.setAutoCommit(false);
 
 				PreparedStatement insertBasket = conn
-						.prepareStatement("insert into basket values (?) on conflict on (firebase_uid) do nothing;");
+						.prepareStatement("insert into basket (firebase_uid) values (?) on conflict on (firebase_uid) do nothing;");
 				insertBasket.setString(1, basket.getFirebase_uid());
 
 				PreparedStatement deleteBasketItems = conn
@@ -82,15 +82,15 @@ public final class BasketDAO {
 		}
 	}
 
-	public static void deleteBasket(Basket basket, DataSource ds) throws SQLException {
+	public static void deleteBasket(String firebaseUid, DataSource ds) throws SQLException {
 		try (Connection conn = ds.getConnection()) {
 			try {
 				conn.setAutoCommit(false);
 
 				PreparedStatement deleteBasket = conn.prepareStatement("delete from basket where firebase_uid = ?;");
-				deleteBasket.setString(1, basket.getFirebase_uid());
+				deleteBasket.setString(1, firebaseUid);
 				PreparedStatement deleteBasketItems = conn.prepareStatement("delete from basketitem where firebase_uid = ?;");
-				deleteBasketItems.setString(1, basket.getFirebase_uid());
+				deleteBasketItems.setString(1, firebaseUid);
 
 				deleteBasket.execute();
 				deleteBasketItems.execute();

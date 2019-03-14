@@ -1,4 +1,4 @@
-package com.ccomp.servlets;
+package com.ccomp.utilities;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

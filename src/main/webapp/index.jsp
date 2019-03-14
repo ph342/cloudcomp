@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h2>Hello!</h2>
-	<a href="/getAllItems">Click me for JSON demo.</a>
+	<a href="/Items/">Click me for JSON demo.</a>
 
 </body>
 </html>
