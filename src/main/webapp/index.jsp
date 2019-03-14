@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
@@ -12,7 +11,7 @@
 </head>
 <body>
 	<h2>Hello!</h2>
+	<a href="/getAllItems">Click me for JSON demo.</a>
 
-	<p>${requestScope['indexServlet.testData']}</p> <!-- we need to use requestScope[] if the name contains any "." -->
 </body>
 </html>
