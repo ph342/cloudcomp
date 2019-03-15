@@ -47,11 +47,6 @@ public final class Items extends HttpServlet {
 			Item item = ItemDAO.findById(Integer.valueOf(itemNr),
 					(DataSource) req.getServletContext().getAttribute(GCloudSQL.conn));
 
-			if (item == null) {
-				resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-				return;
-			}
-
 			ServletUtilities.sendAsJson(resp, item);
 		} catch (SQLException e) {
 			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());

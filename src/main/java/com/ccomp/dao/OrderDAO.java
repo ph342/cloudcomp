@@ -39,11 +39,12 @@ public final class OrderDAO {
 						resultOrder.getString("firebase_uid"), items, false);
 
 			} else
-				throw new SQLException("No order found.");
+				return null;
 		}
 	}
 
 	public static List<Order> findByCustomer(String firebaseUid, DataSource ds) throws SQLException {
+		List<Order> ret = new Vector<Order>();
 		try (Connection conn = ds.getConnection()) {
 			PreparedStatement selectOrder = conn
 					.prepareStatement("select * from \"Order\" o join orderitem oi on o.order_nr = oi.order_nr "
@@ -51,11 +52,10 @@ public final class OrderDAO {
 			selectOrder.setString(1, firebaseUid);
 
 			ResultSet resultOrder = selectOrder.executeQuery();
-			List<Order> ret = new Vector<Order>();
 			Order order;
 
 			if (!resultOrder.next())
-				throw new SQLException("No orders found.");
+				return ret;
 
 			order = new Order(resultOrder.getInt("order_nr"), resultOrder.getObject("timestamp", LocalDateTime.class),
 					resultOrder.getString("status"), resultOrder.getString("firebase_uid"), false);
@@ -80,8 +80,42 @@ public final class OrderDAO {
 
 				items.add(new OrderItem(resultOrder.getInt("item_counter"), resultOrder.getInt("item_nr")));
 			}
-			return ret;
 		}
+		return ret;
+	}
+
+	public static List<Order> findAllOrders(DataSource ds) throws SQLException {
+		List<Order> ret = new Vector<Order>();
+
+		try (Connection conn = ds.getConnection()) {
+			PreparedStatement selectOrder = conn.prepareStatement("select * from \"Order\";");
+			PreparedStatement selectOrderItems = conn.prepareStatement("select * from orderitem;",
+					ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+			ResultSet resultOrder = selectOrder.executeQuery();
+			ResultSet resultOrderItems = selectOrderItems.executeQuery();
+			Order order;
+
+			while (resultOrder.next()) {
+				order = new Order(resultOrder.getInt("order_nr"),
+						resultOrder.getObject("timestamp", LocalDateTime.class), resultOrder.getString("status"),
+						resultOrder.getString("firebase_uid"), false);
+
+				ret.add(order);
+
+				// collect the items for this order from the result set
+				List<OrderItem> items = new Vector<OrderItem>();
+				resultOrderItems.beforeFirst();
+
+				while (resultOrderItems.next())
+					if (resultOrderItems.getInt("order_nr") == order.getOrderNr())
+						items.add(new OrderItem(resultOrderItems.getInt("item_counter"),
+								resultOrderItems.getInt("item_nr")));
+
+				order.setItems(items);
+			}
+		}
+		return ret;
 	}
 
 	public static void insertOrder(Order order, DataSource ds) throws SQLException {
@@ -94,11 +128,21 @@ public final class OrderDAO {
 				// disable Commit
 				conn.setAutoCommit(false);
 
-				PreparedStatement insertOrder = conn
-						.prepareStatement("insert into \"Order\" values (default, ?, ?, ?);");
+				PreparedStatement insertOrder = conn.prepareStatement(
+						"insert into \"Order\" values (default, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
 				insertOrder.setObject(1, order.getTimestamp());
 				insertOrder.setString(2, order.getStatus());
 				insertOrder.setString(3, order.getFirebaseUid());
+
+				// insert Order
+				insertOrder.executeUpdate();
+
+				// what's the new key?
+				ResultSet generatedKeys = insertOrder.getGeneratedKeys();
+				if (generatedKeys.next()) {
+					order.setFlNew(false);
+					order.setOrderNr(generatedKeys.getInt(1));
+				}
 
 				List<PreparedStatement> allItems = new ArrayList<PreparedStatement>();
 
@@ -112,20 +156,11 @@ public final class OrderDAO {
 					allItems.add(insertOrderItem);
 				}
 
-				// insert Order
-				insertOrder.execute();
 				// insert Items
 				for (PreparedStatement ps : allItems) {
 					ps.execute();
 				}
 				conn.commit();
-
-				// the order was committed => what's the new key?
-				order.setFlNew(false);
-				PreparedStatement selectOrderNr = conn
-						.prepareStatement("select order_nr from \"Order\" where timestamp = ?;");
-				selectOrderNr.setObject(1, order.getTimestamp());
-				order.setOrderNr(selectOrderNr.executeQuery().getInt(1));
 
 			} catch (SQLException e) {
 				conn.rollback();
@@ -182,18 +217,18 @@ public final class OrderDAO {
 		}
 	}
 
-	public static void deleteOrder(Order order, DataSource ds) throws SQLException {
+	public static void deleteOrder(int orderNr, DataSource ds) throws SQLException {
 		try (Connection conn = ds.getConnection()) {
 			try {
 				conn.setAutoCommit(false);
 
 				PreparedStatement deleteOrder = conn.prepareStatement("delete from \"Order\" where order_nr = ?;");
-				deleteOrder.setInt(1, order.getOrderNr());
+				deleteOrder.setInt(1, orderNr);
 				PreparedStatement deleteOrderItems = conn.prepareStatement("delete from orderitem where order_nr = ?;");
-				deleteOrderItems.setInt(1, order.getOrderNr());
+				deleteOrderItems.setInt(1, orderNr);
 
-				deleteOrder.execute();
 				deleteOrderItems.execute();
+				deleteOrder.execute();
 
 				conn.commit();
 			} catch (SQLException e) {

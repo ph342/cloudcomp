@@ -47,11 +47,6 @@ public final class Baskets extends HttpServlet {
 			Basket basket = BasketDAO.findById(firebaseUid,
 					(DataSource) req.getServletContext().getAttribute(GCloudSQL.conn));
 
-			if (basket == null) {
-				resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-				return;
-			}
-
 			ServletUtilities.sendAsJson(resp, basket);
 		} catch (SQLException e) {
 			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
@@ -59,7 +54,7 @@ public final class Baskets extends HttpServlet {
 	}
 
 	// Add new Basket to DB
-	// in: Basket entity in payload
+	// in: Basket entity in payload (basketItemNumber is empty)
 	// out: Basket entity
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -78,6 +73,8 @@ public final class Baskets extends HttpServlet {
 				buffer.append(line);
 
 			Basket basket = new Gson().fromJson(buffer.toString(), Basket.class);
+			
+			basket.organiseBasketItemCounters();
 
 			BasketDAO.modifyBasket(basket, (DataSource) req.getServletContext().getAttribute(GCloudSQL.conn));
 
@@ -88,7 +85,7 @@ public final class Baskets extends HttpServlet {
 	}
 
 	// Update existing Basket in DB
-	// in: Basket entity in payload
+	// in: Basket entity in payload (basketItemNumber is empty)
 	// out: Basket entity
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

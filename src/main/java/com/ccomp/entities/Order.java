@@ -12,8 +12,8 @@ public class Order implements Serializable {
 	private LocalDateTime timestamp;
 	private String status;
 	private String firebaseUid;
-	private List<OrderItem> items;
 	private boolean flNew; // order is new
+	private List<OrderItem> items;
 
 	public Order() {
 	}

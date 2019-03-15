@@ -23,7 +23,7 @@ public final class ItemDAO {
 				return new Item(result.getInt("item_nr"), result.getString("name"), result.getString("description"),
 						result.getDouble("price"), result.getString("currency"), result.getInt("image_key"));
 			} else
-				throw new SQLException("No item found.");
+				return null;
 		}
 	}
 

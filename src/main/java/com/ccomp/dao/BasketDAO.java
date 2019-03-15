@@ -36,7 +36,7 @@ public final class BasketDAO {
 				return new Basket(firebaseUid, items);
 
 			} else
-				throw new SQLException("No basket found.");
+				return null;
 		}
 	}
 
@@ -47,8 +47,8 @@ public final class BasketDAO {
 				// disable Commit
 				conn.setAutoCommit(false);
 
-				PreparedStatement insertBasket = conn
-						.prepareStatement("insert into basket (firebase_uid) values (?) on conflict on (firebase_uid) do nothing;");
+				PreparedStatement insertBasket = conn.prepareStatement(
+						"insert into basket (firebase_uid) values (?) on conflict (firebase_uid) do nothing;");
 				insertBasket.setString(1, basket.getFirebase_uid());
 
 				PreparedStatement deleteBasketItems = conn
@@ -89,11 +89,12 @@ public final class BasketDAO {
 
 				PreparedStatement deleteBasket = conn.prepareStatement("delete from basket where firebase_uid = ?;");
 				deleteBasket.setString(1, firebaseUid);
-				PreparedStatement deleteBasketItems = conn.prepareStatement("delete from basketitem where firebase_uid = ?;");
+				PreparedStatement deleteBasketItems = conn
+						.prepareStatement("delete from basketitem where firebase_uid = ?;");
 				deleteBasketItems.setString(1, firebaseUid);
 
-				deleteBasket.execute();
 				deleteBasketItems.execute();
+				deleteBasket.execute();
 
 				conn.commit();
 			} catch (SQLException e) {
