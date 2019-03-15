@@ -56,7 +56,7 @@ public class Orders extends HttpServlet {
 
 			String[] splits = pathInfo.split("/");
 
-			if (splits.length != 2 && (splits.length != 3 || splits[2] != "firebaseUid")) {
+			if (splits.length != 2 && (splits.length != 3 || !splits[1].equals("firebaseUid"))) {
 				resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
 				return;
 			}
@@ -88,7 +88,7 @@ public class Orders extends HttpServlet {
 	}
 
 	// Add new Order to DB
-	// in: Order entity in payload (orderNr is empty, timestamp is empty, flNew is empty)
+	// in: Order entity in payload (not necessary: orderNr, timestamp, flNew)
 	// out: Order entity
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -127,7 +127,7 @@ public class Orders extends HttpServlet {
 	}
 
 	// Update existing Order in DB
-	// in: Order entity in payload (orderItemNumber is empty, timestamp is empty)
+	// in: Order entity in payload (not necessary: orderNr, timestamp, flNew)
 	// out: Order entity
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

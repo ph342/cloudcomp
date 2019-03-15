@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -129,7 +130,7 @@ public final class OrderDAO {
 				conn.setAutoCommit(false);
 
 				PreparedStatement insertOrder = conn.prepareStatement(
-						"insert into \"Order\" values (default, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
+						"insert into \"Order\" values (default, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
 				insertOrder.setObject(1, order.getTimestamp());
 				insertOrder.setString(2, order.getStatus());
 				insertOrder.setString(3, order.getFirebaseUid());
