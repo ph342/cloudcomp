@@ -7,12 +7,15 @@ function login() {
 	var pass = document.getElementById("password");
 
 	if (username.value == "") {
-		alert("Input UserName");
+		resultOutput.style.color = '#0f0'
+		resultOutput.innerText = 'Please insert username'
 	} else if (pass.value == "") {
-		alert("Insert Password");
+		resultOutput.style.color = '#0f0'
+		resultOutput.innerText = 'Please insert password'
 	} else if (username.value == "admin" && pass.value == "1234") {
 		window.location.href = "itemlist.html";
 	} else {
-		alert("UserName and Password are not match！");
+		resultOutput.style.color = '#0f0'
+		resultOutput.innerText = 'username and paswword do not match'
 	}
 }
