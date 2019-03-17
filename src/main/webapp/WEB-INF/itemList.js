@@ -35,7 +35,7 @@ function loadAll() {
 		result = "</table><br/><strong><label>total price：</label><span id='amount'></span></strong>";
 		list.innerHTML = result;
 	} else {
-		list.innerHTML = "It is empty……";
+		list.innerHTML = "Basket is empty……";
 	}
 	// load items and calculate total price
 	Count();
@@ -44,7 +44,6 @@ function loadAll() {
 function deleteGoods(item) {
 	var val = item.parentNode.parentNode;
 	var children1 = val.children[0].innerText;
-	s
 	localStorage.removeItem(children1);
 	loadAll();
 }
