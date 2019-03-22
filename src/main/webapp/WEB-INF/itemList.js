@@ -56,3 +56,27 @@ function Count() {
 	}
 	document.getElementById('amount').innerHTML = amount;
 }
+
+$(document).ready(function() {
+	$('.btn').on('click', function() {
+		// show json in list
+		$.ajax({
+			type : 'GET',
+			url : 'https://ruienyuski.github.io/git_test/data.json',
+			dataType : 'json',
+			success : function(response) {
+				$.each(response, function(index, element) {
+					$('.info').append($('<li>', {
+						text : [ index + 1 ] + '.' + 'Name：' + element.Name
+					}), $('<li>', {
+						text : [ index + 1 ] + '.' + 'Price：' + element.Price
+					}), $('<p>'));
+				});
+			},
+			error : function(xhr) {
+				alert("error : " + xhr.status + " " + xhr.statusText);
+			}
+		});
+
+	});
+});
