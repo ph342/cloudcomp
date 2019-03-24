@@ -2,22 +2,10 @@
 <html lang="en">
 <head>
 <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
-<script>
-	// Initialize Firebase
-	var config = {
-		apiKey : "AIzaSyDs2-dJqGcEulxb56LkGV7NuOmKpNujZSc",
-		authDomain : "cloudcwk.firebaseapp.com",
-		databaseURL : "https://cloudcwk.firebaseio.com",
-		projectId : "cloudcwk",
-		storageBucket : "cloudcwk.appspot.com",
-		messagingSenderId : "69057237839"
-	};
-	firebase.initializeApp(config);
-</script>
+<script type="text/javascript" src="firebase.js"></script>
 <meta charset="UTF-8">
 <title>User Login</title>
 <link rel="stylesheet" type="text/css" href="login.css" />
-<script type="text/javascript" src="firebase.js"></script>
 <script type="text/javascript" src="login.js"></script>
 </head>
 <body>
@@ -27,17 +15,19 @@
 		</p>
 		<form method="post" action="login.js">
 			<p>
-				<label class="label_input">UserName</label><input type="text"
-					id="username" class="text_field" />
+				<label class="label_input">UserName</label> <input id="accountL"
+					type="text">
 			</p>
 			<p>
-				<label class="label_input">Password</label><input type="text"
-					id="password" class="text_field" />
+				<label class="label_input">Password</label> <input id="pwdL"
+					type="password">
 			</p>
 			<div id="login_control">
-				<input type="button" id="btn_login" value="Login" onclick="login()" />
+				<button type="submit" id="loginSmtBtn">Login</button>
+				<button id="signoutSmtBtn">Sign out</button>
 				<a id="forget_pwd" href="forget_pwd.html">Forget Password？</a>
 			</div>
+			
 		</form>
 	</div>
 </body>
