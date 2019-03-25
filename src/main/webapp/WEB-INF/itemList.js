@@ -3,13 +3,51 @@
  */
 // load data in localStorage
 loadAll();
+
+
+var db = firebase.firestore();
 // save
-function save() {
+/*
+function storedata() {
 	var goods = document.getElementById("goods").value;
 	var price = document.getElementById("price").value;
-	localStorage.setItem(price, goods);
-	loadAll();
-}
+	  console.log("gogogo:");
+	  db.collection("items").doc(goods).set({
+	    name: good,
+	    date: "12/03/2019",
+	    desctiption: "big cutter",
+	    price: price
+	  });
+	}
+*/
+function storedata() {
+	var goods = document.getElementById("goods").value;
+	var price = document.getElementById("price").value;
+	var Data = {
+			   "name":goods,
+			   "price":price
+			}
+			firebase.database().ref("/items").push(Data);
+	}
+
+function getdata() {
+	  var goods = document.getElementById("goods").value;
+	  var docRef = db.collection("items").doc(goods);
+	  docRef.get().then(function(doc) {
+	      if (doc.exists) {
+	        console.log(doc.data().price);
+	        
+	      } else {
+	        console.log("lose");
+	      }
+	    })
+	    .catch(function(error) {
+	      console.log("wrong:", error);
+	    });
+	}
+
+
+
 // find
 function find() {
 	var search_price = document.getElementById("search_price").value;
