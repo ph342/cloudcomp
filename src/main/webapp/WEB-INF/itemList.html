@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+	<script type="text/javascript" src="itemList.js"></script>
+	<h3>Add Item</h3>
+	<div id="addgoods_Div">
+		<div id="add_frame">
+			<label for="price">price：</label> <input type="text" id="price"
+				name="price" class="text" /> <br /> <label for="goods">items：</label>
+			<input type="text" id="goods" name="goods" /> <input id="btn1"
+				type="button" onclick="save()" value="add item" />
+		</div>
+	</div>
+	<br />
+	<div id="search_goods">
+		<label for="search_phone">insert item name：</label> <input type="text"
+			id="search_price" name="search_price" /> <input id="btn2"
+			type="button" onclick="find()" value="search items" />
+		<p id="find_result">
+			<br />
+		</p>
+	</div>
+	<button class="btn">search all</button>
+	<ul class="info">
+	</ul>
+	<br />
+	<div id="list"></div>
+
+
+</body>
+</html>
