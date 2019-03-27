@@ -8,18 +8,11 @@ loadAll();
 var db = firebase.firestore();
 // save
 /*
-function storedata() {
-	var goods = document.getElementById("goods").value;
-	var price = document.getElementById("price").value;
-	  console.log("gogogo:");
-	  db.collection("items").doc(goods).set({
-	    name: good,
-	    date: "12/03/2019",
-	    desctiption: "big cutter",
-	    price: price
-	  });
-	}
-*/
+ * function storedata() { var goods = document.getElementById("goods").value;
+ * var price = document.getElementById("price").value; console.log("gogogo:");
+ * db.collection("items").doc(goods).set({ name: good, date: "12/03/2019",
+ * desctiption: "big cutter", price: price }); }
+ */
 function storedata() {
 	var goods = document.getElementById("goods").value;
 	var price = document.getElementById("price").value;
@@ -45,7 +38,20 @@ function getdata() {
 	      console.log("wrong:", error);
 	    });
 	}
-
+function getdbdata(){
+	  var path = "items";
+	  var itemv = "name"
+	db.ref(`/${path}`).once('value', function (snapshot) {
+	    snapshot.forEach(function (item) {
+	        console.log(item.key + " " + item.val());
+	        var table = document.getElementById("tbody1"); 
+	        var row = table.insertRow(table.rows.length);
+	        var cell = row.insertCell();
+	      cell.innerHTML = "<input type='checkbox' value='1' name='c"+item.val()+"'/>"; 
+	    })
+	});
+	  
+	}
 
 
 // find

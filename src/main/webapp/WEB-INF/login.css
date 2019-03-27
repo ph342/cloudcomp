@@ -13,7 +13,7 @@ body {
 	top: 50%;
 	margin-left: -200px;
 	margin-top: -200px;
-	background-color: rgba(240, 255, 255, 0.5);
+	background-color: rgba(240, 255, 255, 1);
 	border-radius: 10px;
 	text-align: center;
 }
@@ -48,10 +48,24 @@ form p>* {
 	border: 0;
 }
 
-#btn_login {
+#loginSmtBtn {
 	font-size: 14px;
 	font-family: 宋體;
-	width: 120px;
+	width: 60px;
+	height: 28px;
+	line-height: 28px;
+	text-align: center;
+	color: white;
+	background-color: #3BD9FF;
+	border-radius: 6px;
+	border: 0;
+	float: left;
+}
+
+#signoutSmtBtn {
+	font-size: 14px;
+	font-family: 宋體;
+	width: 60px;
 	height: 28px;
 	line-height: 28px;
 	text-align: center;
@@ -67,12 +81,12 @@ form p>* {
 	color: white;
 	text-decoration: none;
 	position: relative;
-	float: right;
+	float: left;
 	top: 5px;
 }
 
 #forget_pwd:hover {
-	color: blue;
+	color: #4f54ff;
 	text-decoration: underline;
 }
 
