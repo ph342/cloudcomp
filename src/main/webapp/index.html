@@ -2,87 +2,77 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Tools Shop</title>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="noindex,follow" />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+<script>
+	// Initialize Firebase
+	var config = {
+		apiKey : "AIzaSyDs2-dJqGcEulxb56LkGV7NuOmKpNujZSc",
+		authDomain : "cloudcwk.firebaseapp.com",
+		databaseURL : "https://cloudcwk.firebaseio.com",
+		projectId : "cloudcwk",
+		storageBucket : "cloudcwk.appspot.com",
+		messagingSenderId : "69057237839"
+	};
+	firebase.initializeApp(config);
+</script>
+<script
+	src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet"
+	href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/boxOver.js"></script>
+<script type="text/javascript" src="js/account.js"></script>
+<script type="text/javascript" src="js/jsonToHtml.js"></script>
 </head>
 <body>
-<div id="main_container">
-  <div id="header">
-    <div id="logo"> <a href="#"><img src="https://storage.googleapis.com/cloudcwkstorage/images/webPic/logo.png" alt="" border="0" width="182" height="85" /></a> </div>
-  </div>
-  <div id="main_content">
-    <div id="menu_tab">
-      <ul class="menu">
-        <li><a href="#" class="nav">Home</a></li>
-        <li class="divider"></li>
-        <li><a href="#" class="nav">My account</a></li>
-        <li class="divider"></li>
-        <li><a href="#" class="nav">Shopping Basket</a></li>
-      </ul>
-    </div>
-    <!-- end of menu tab -->
-    <div class="center_content">
-      <div class="center_title_bar">Latest Products</div>
-      <!--  TODO: fill the prod_boxes with content from the backend -->
-      <div class="prod_box">
-        <div class="center_prod_box">
-          <div class="product_title"><a href="#">Makita 156 MX-VL</a></div>
-          <div class="product_img"><a href="#"><img src="images/p1.jpg" alt="" border="0" /></a></div>
-          <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
-        </div>
-        <div class="prod_details_tab"> <a href="#" class="prod_buy">Add to Cart</a> <a href="#" class="prod_details">Details</a> </div>
-      </div>
-      <div class="prod_box">
-        <div class="center_prod_box">
-          <div class="product_title"><a href="#">Bosch XC</a></div>
-          <div class="product_img"><a href="#"><img src="images/p2.jpg" alt="" border="0" /></a></div>
-          <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
-        </div>
-        <div class="prod_details_tab"> <a href="#" class="prod_buy">Add to Cart</a> <a href="#" class="prod_details">Details</a> </div>
-      </div>
-      <div class="prod_box">
-        <div class="center_prod_box">
-          <div class="product_title"><a href="#">Lotus PP4</a></div>
-          <div class="product_img"><a href="#"><img src="images/p4.jpg" alt="" border="0" /></a></div>
-          <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
-        </div>
-        <div class="prod_details_tab"> <a href="#" class="prod_buy">Add to Cart</a> <a href="#" class="prod_details">Details</a> </div>
-      </div>
-      <div class="prod_box">
-        <div class="center_prod_box">
-          <div class="product_title"><a href="#">Makita 156 MX-VL</a></div>
-          <div class="product_img"><a href="#"><img src="images/p3.jpg" alt="" border="0" /></a></div>
-          <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
-        </div>
-        <div class="prod_details_tab"> <a href="#" class="prod_buy">Add to Cart</a> <a href="#" class="prod_details">Details</a> </div>
-      </div>
-      <div class="prod_box">
-        <div class="center_prod_box">
-          <div class="product_title"><a href="#">Bosch XC</a></div>
-          <div class="product_img"><a href="#"><img src="images/p5.jpg" alt="" border="0" /></a></div>
-          <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
-        </div>
-        <div class="prod_details_tab"> <a href="#" class="prod_buy">Add to Cart</a> <a href="#" class="prod_details">Details</a> </div>
-      </div>
-      <div class="prod_box">
-        <div class="center_prod_box">
-          <div class="product_title"><a href="#">Lotus PP4</a></div>
-          <div class="product_img"><a href="#"><img src="images/p6.jpg" alt="" border="0" /></a></div>
-          <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
-        </div>
-        <div class="prod_details_tab"> <a href="#" class="prod_buy">Add to Cart</a> <a href="#" class="prod_details">Details</a> </div>
-      </div>
-    </div>
-    <!-- end of center content -->
-  </div>
-  <!-- end of main content -->
-  <div class="footer">
-    <div class="left_footer"> <img src="https://storage.googleapis.com/cloudcwkstorage/images/webPic/logo.png" alt="" width="89" height="42"/> </div>
-      <a href="http://csscreme.com"><img src="images/csscreme.jpg" alt="csscreme" title="csscreme" border="0" /></a><br />
-      <img src="images/payment.gif" alt="" />
-  </div>
-</div>
-<!-- end of main_container -->
+	<div id="main_container">
+		<div id="header">
+			<div id="logo">
+				<a href="#"><img
+					src="https://storage.googleapis.com/cloudcwkstorage/images/webPic/logo.png"
+					alt="" border="0" width="182" height="85" /></a>
+			</div>
+		</div>
+		<div id="main_content">
+			<div id="menu_tab">
+				<ul class="menu">
+					<li><a href="#welcome" class="nav">Home</a></li>
+					<li class="divider"></li>
+					<li><a href="#account" class="nav">My account</a></li>
+					<li class="divider"></li>
+					<li><a href="#basket" class="nav">Shopping Basket</a></li>
+				</ul>
+<!-- 									<li><a href="#welcome" onclick="checkURL(#welcome)" class="nav">Home</a></li> -->
+<!-- 					<li class="divider"></li> -->
+<!-- 					<li><a href="#account" onclick="checkURL(#account)" class="nav">My account</a></li> -->
+<!-- 					<li class="divider"></li> -->
+<!-- 					<li><a href="#basket" onclick="checkURL(#basket)" class="nav">Shopping Basket</a></li> -->
+				
+			</div>
+			<!-- end of menu tab -->
+			<img id="loading" height="10" width="10" src="images/ajax_load.gif"
+				alt="loading" />
+			<div id="center_content" />
+		</div>
+		<!-- end of main content -->
+		<div class="footer">
+			<div class="left_footer">
+				<img
+					src="https://storage.googleapis.com/cloudcwkstorage/images/webPic/logo.png"
+					alt="" width="89" height="42" />
+			</div>
+			<a href="http://csscreme.com"><img src="images/csscreme.jpg"
+				alt="csscreme" title="csscreme" border="0" /></a><br /> <img
+				src="images/payment.gif" alt="" />
+		</div>
+	</div>
+	<!-- end of main_container -->
 </body>
 </html>
