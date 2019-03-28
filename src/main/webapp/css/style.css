@@ -1,6 +1,6 @@
 body
 {
-background:url(images/bg.jpg) repeat-x #e4e9ec top;
+background:url(../../images/bg.jpg) repeat-x #e4e9ec top;
 padding:0;
 font-family:Arial, Helvetica, sans-serif;
 font-size:11px;
@@ -21,7 +21,7 @@ background-color:#FFFFFF;
 #header{
 width:1000px;
 height:136px;
-background:url(images/header_bg.jpg) no-repeat center;
+background:url(../images/header_bg.jpg) no-repeat center;
 background-position:0px 0px;
 margin:auto;
 }
@@ -59,11 +59,11 @@ padding:10px 10px 0 0;
 #menu_tab{
 width:1000px;
 height:36px;
-background:url(images/menu_bg.gif) repeat-x;
+background:url(../images/menu_bg.gif) repeat-x;
 }
 ul.menu {
 list-style-type:none; float:left; display:block; width:982px; 
-margin:0px; padding:0px;background:url(images/menu_bg.gif) repeat-x;}
+margin:0px; padding:0px;background:url(../images/menu_bg.gif) repeat-x;}
 
 ul.menu li {
 display:inline;
@@ -76,11 +76,11 @@ display:inline;
 width:4px;
 height:36px;
 float:left;
-background:url(images/menu_divider.gif) no-repeat center;
+background:url(../images/menu_divider.gif) no-repeat center;
 }
 
 a.nav:link, a.nav:visited {
-display:block; float:left; padding:0px 8px 0px 8px; margin:0 14px 0 14px;height:36px;text-decoration:none;color:#199ECD;}
+display:block; float:left; padding:0px 8px 0px 8px; margin:0 14px 0 14px;height:36px;text-decoration:none;color:#fff;}
 
 a.nav:hover{
 display:block; float:left; padding:0px 8px 0px 8px; margin:0 14px 0 14px;height:36px;text-decoration:none;color:#199ECD;}
@@ -91,7 +91,7 @@ width:980px;
 height:15px;
 padding:5px 10px 0 20px;
 color:#333333;
-background:url(images/navbullet.png) no-repeat left;
+background:url(../images/navbullet.png) no-repeat left;
 background-position:5px 8px;
 }
 .crumb_navigation a{
@@ -112,7 +112,7 @@ padding:0 0 0 5px;
 width:180px;
 height:30px;
 margin:5px 0 0 0;
-background:url(images/menu_title_bg.gif) no-repeat center;
+background:url(../images/menu_title_bg.gif) no-repeat center;
 text-align:center;
 font-size:13px;
 font-weight:bold;
@@ -146,7 +146,7 @@ color:#000; text-decoration:underline;
 width:180px;
 height:auto;
 text-align:center;
-background:url(images/box_bottom_bg.gif) no-repeat center bottom;
+background:url(../images/box_bottom_bg.gif) no-repeat center bottom;
 }
 .product_title{
 color:#ff8a00;
@@ -202,7 +202,7 @@ padding:10px 0 10px 0;
 .oferta{
 width:585px;
 height:156px;
-background:url(images/slider_bg.gif) no-repeat center;
+background:url(../images/slider_bg.gif) no-repeat center;
 float:left;
 padding:0px;
 margin:0 0 5px 5px;
@@ -244,7 +244,7 @@ line-height:31px;
 font-size:12px;
 color:#159DCC;
 font-weight:bold;
-background:url(images/bar_bg.gif) no-repeat center;
+background:url(../images/bar_bg.gif) no-repeat center;
 }
 
 /*----------------------right content--------------*/
@@ -307,7 +307,7 @@ width:75px;
 height:24px;
 display:block;
 float:right;
-background:url(images/link_bg.gif) no-repeat center;
+background:url(../images/link_bg.gif) no-repeat center;
 margin:2px 5px 0 0;
 text-align:center;
 line-height:24px;
@@ -320,7 +320,7 @@ width:75px;
 height:24px;
 display:block;
 float:left;
-background:url(images/link_bg.gif) no-repeat center;
+background:url(../images/link_bg.gif) no-repeat center;
 margin:2px 0 0 5px;
 text-align:center;
 line-height:24px;
@@ -332,7 +332,7 @@ width:75px;
 height:24px;
 display:block;
 float:left;
-background:url(images/link_bg.gif) no-repeat center;
+background:url(../images/link_bg.gif) no-repeat center;
 margin:2px 0 0 5px;
 text-align:center;
 line-height:24px;
@@ -388,7 +388,7 @@ width:76px;
 height:27px;
 display:block;
 float:left;
-background:url(images/addtocart.gif) no-repeat left;
+background:url(../images/addtocart.gif) no-repeat left;
 padding:0 0 0 33px;
 text-decoration:none;
 line-height:27px;
@@ -400,7 +400,7 @@ height:27px;
 display:block;
 float:left;
 margin:0 0 0 10px;
-background:url(images/compare.gif) no-repeat left;
+background:url(../images/compare.gif) no-repeat left;
 padding:0 0 0 33px;
 text-decoration:none;
 line-height:27px;
@@ -453,7 +453,7 @@ height:27px;
 display:block;
 float:right;
 margin:0 0 0 10px;
-background:url(images/contact_bt.gif) no-repeat left;
+background:url(../images/contact_bt.gif) no-repeat left;
 padding:0 0 0 10px;
 text-decoration:none;
 line-height:27px;
@@ -464,7 +464,7 @@ color:#1c4a52;
 width:1000px;
 clear:both;
 height:65px;
-background:url(images/footer_bg.gif) repeat-x top;
+background:url(../images/footer_bg.gif) repeat-x top;
 }
 .left_footer{
 float:left;
