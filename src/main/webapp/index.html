@@ -26,6 +26,9 @@
 	href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/alertify.min.js"></script>
+<link type="text/css" rel="stylesheet" href="css/alertify.min.css" />
+<link type="text/css" rel="stylesheet" href="css/themes/default.min.css" />
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/boxOver.js"></script>
 <script type="text/javascript" src="js/account.js"></script>
@@ -35,7 +38,7 @@
 	<div id="main_container">
 		<div id="header">
 			<div id="logo">
-				<a href="#"><img
+				<a href="#welcome"><img
 					src="https://storage.googleapis.com/cloudcwkstorage/images/webPic/logo.png"
 					alt="" border="0" width="182" height="85" /></a>
 			</div>
@@ -49,17 +52,11 @@
 					<li class="divider"></li>
 					<li><a href="#basket" class="nav">Shopping Basket</a></li>
 				</ul>
-<!-- 									<li><a href="#welcome" onclick="checkURL(#welcome)" class="nav">Home</a></li> -->
-<!-- 					<li class="divider"></li> -->
-<!-- 					<li><a href="#account" onclick="checkURL(#account)" class="nav">My account</a></li> -->
-<!-- 					<li class="divider"></li> -->
-<!-- 					<li><a href="#basket" onclick="checkURL(#basket)" class="nav">Shopping Basket</a></li> -->
-				
 			</div>
 			<!-- end of menu tab -->
 			<img id="loading" height="10" width="10" src="images/ajax_load.gif"
 				alt="loading" />
-			<div id="center_content" />
+			<div id="center_content"></div>
 		</div>
 		<!-- end of main content -->
 		<div class="footer">
