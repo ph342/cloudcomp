@@ -30,7 +30,7 @@ import com.google.gson.JsonParseException;
 public class Orders extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	// Get single Order OR all orders
+	// GET: Get single Order OR all orders
 	// METHOD 1:
 	// in: orderNr in URI, /Orders/<orderNr>
 	// out: Order entities
@@ -39,7 +39,7 @@ public class Orders extends HttpServlet {
 	// out: Order entities
 	// METHOD 3:
 	// in: nothing
-	// out: Order entities
+	// out: all Order entities
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {

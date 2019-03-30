@@ -14,8 +14,10 @@ import com.ccomp.entities.Basket;
 import com.ccomp.entities.BasketItem;
 
 public final class BasketDAO {
+	// DAO for the basket and basket items
 
 	public static Basket findById(String firebaseUid, DataSource ds) throws SQLException {
+		// find the basket of a user
 		try (Connection conn = ds.getConnection()) {
 			PreparedStatement selectBasket = conn.prepareStatement("select * from basket where firebase_uid = ?;");
 			selectBasket.setString(1, firebaseUid);
@@ -83,6 +85,7 @@ public final class BasketDAO {
 	}
 
 	public static void deleteBasket(String firebaseUid, DataSource ds) throws SQLException {
+		// delete the basket of a user
 		try (Connection conn = ds.getConnection()) {
 			try {
 				conn.setAutoCommit(false);

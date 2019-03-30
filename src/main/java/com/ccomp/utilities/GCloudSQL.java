@@ -14,6 +14,7 @@ public final class GCloudSQL implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
+		// establish connection with the backend DB on Google Cloud
 		HikariConfig config = new HikariConfig();
 		config.setJdbcUrl("jdbc:postgresql://google/postgres?useSSL=false");
 		config.setUsername("postgres");
@@ -32,6 +33,7 @@ public final class GCloudSQL implements ServletContextListener {
 
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
+		// close DB connection config
 		HikariDataSource pool = (HikariDataSource) sce.getServletContext().getAttribute(conn);
 		if (pool != null) {
 			pool.close();

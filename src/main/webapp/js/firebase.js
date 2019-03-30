@@ -1,5 +1,18 @@
+// Initialize Firebase
+var config = {
+	apiKey : "AIzaSyDs2-dJqGcEulxb56LkGV7NuOmKpNujZSc",
+	authDomain : "cloudcwk.firebaseapp.com",
+	databaseURL : "https://cloudcwk.firebaseio.com",
+	projectId : "cloudcwk",
+	storageBucket : "cloudcwk.appspot.com",
+	messagingSenderId : "69057237839"
+};
+firebase.initializeApp(config);
+
 function login() {
-    return new Promise(
+	// if necessary, login
+
+	return new Promise(
         function(resolve, reject) {
 
             // check if logged in
@@ -10,17 +23,10 @@ function login() {
             } else {
                 // No user is signed in.
                 var provider = new firebase.auth.GoogleAuthProvider();
-                firebase.auth().signInWithPopup(provider).then(function(result) {
-                    // This gives you a Google Access Token. You can use it to
-                    // access the Google API.
-                    var token = result.credential.accessToken;
-                    // The signed-in user info.
-                    user = result.user;
-                    resolve(user);
-
+                firebase.auth().signInWithPopup(provider)
+                  .then(function(result) {
+                    resolve(result.user);
                 }).catch(function(error) {
-                    // Handle Errors here.
-                    user = null;
                     window.location.hash = '#welcome';
                     reject(error.message);
                 });

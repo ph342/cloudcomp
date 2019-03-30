@@ -12,8 +12,10 @@ import javax.sql.DataSource;
 import com.ccomp.entities.Item;
 
 public final class ItemDAO {
+	// DAO for shop items
 
 	public static Item findById(int itemNr, DataSource ds) throws SQLException {
+		// find an item
 		try (Connection conn = ds.getConnection()) {
 			PreparedStatement selectClause = conn.prepareStatement("select * from item where item_nr = ?;");
 			selectClause.setInt(1, itemNr);
@@ -28,6 +30,7 @@ public final class ItemDAO {
 	}
 
 	public static List<Item> findAllItems(DataSource ds) throws SQLException {
+		// get all items
 		List<Item> ret = new Vector<Item>();
 
 		try (Connection conn = ds.getConnection()) {

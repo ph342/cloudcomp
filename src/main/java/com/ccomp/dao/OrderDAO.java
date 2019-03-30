@@ -16,8 +16,11 @@ import com.ccomp.entities.Order;
 import com.ccomp.entities.OrderItem;
 
 public final class OrderDAO {
+	// DAO for orders and order items
 
 	public static Order findById(int orderNr, DataSource ds) throws SQLException {
+		// get one order by ID
+		
 		try (Connection conn = ds.getConnection()) {
 			PreparedStatement selectOrder = conn.prepareStatement("select * from \"Order\" where order_nr = ?;");
 			selectOrder.setInt(1, orderNr);
@@ -45,7 +48,10 @@ public final class OrderDAO {
 	}
 
 	public static List<Order> findByCustomer(String firebaseUid, DataSource ds) throws SQLException {
-		List<Order> ret = new Vector<Order>();
+		// get all orders of a customer
+		
+		List<Order> ret = new Vector<Order>(); // return
+		
 		try (Connection conn = ds.getConnection()) {
 			PreparedStatement selectOrder = conn
 					.prepareStatement("select * from \"Order\" o join orderitem oi on o.order_nr = oi.order_nr "
@@ -76,7 +82,6 @@ public final class OrderDAO {
 					ret.add(order);
 					items = new Vector<OrderItem>();
 					order.setItems(items);
-					items.add(new OrderItem(resultOrder.getInt("item_counter"), resultOrder.getInt("item_nr")));
 				}
 
 				items.add(new OrderItem(resultOrder.getInt("item_counter"), resultOrder.getInt("item_nr")));
@@ -86,7 +91,9 @@ public final class OrderDAO {
 	}
 
 	public static List<Order> findAllOrders(DataSource ds) throws SQLException {
-		List<Order> ret = new Vector<Order>();
+		// get all orders
+
+		List<Order> ret = new Vector<Order>(); // return
 
 		try (Connection conn = ds.getConnection()) {
 			PreparedStatement selectOrder = conn.prepareStatement("select * from \"Order\";");
@@ -120,6 +127,8 @@ public final class OrderDAO {
 	}
 
 	public static void insertOrder(Order order, DataSource ds) throws SQLException {
+		// insert a new order
+
 		// this method is only accessible for new orders
 		if (!order.isFlNew())
 			return;
@@ -171,6 +180,8 @@ public final class OrderDAO {
 	}
 
 	public static void updateOrder(Order order, DataSource ds) throws SQLException {
+		// update an existing order
+		
 		// this method is only accessible for old orders
 		if (order.isFlNew())
 			return;
@@ -219,6 +230,8 @@ public final class OrderDAO {
 	}
 
 	public static void deleteOrder(int orderNr, DataSource ds) throws SQLException {
+		// delete an order
+		
 		try (Connection conn = ds.getConnection()) {
 			try {
 				conn.setAutoCommit(false);

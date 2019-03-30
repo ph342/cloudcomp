@@ -20,14 +20,14 @@ import com.ccomp.utilities.ServletUtilities;
 public final class Items extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	// Get single or all Items
+	// GET: Get a single or all Items
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			String pathInfo = req.getPathInfo();
 
 			if (pathInfo == null || pathInfo.equals("/")) {
-				// get data from model
+				// return all items
 				List<Item> allItems = ItemDAO
 						.findAllItems((DataSource) req.getServletContext().getAttribute(GCloudSQL.conn));
 
